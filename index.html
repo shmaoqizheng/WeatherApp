@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
 
-	</body>
+<head>
+	<meta charset="utf-8">
+	<title>WeatherApp</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('form').submit(function() {
+				var city = $("#city").val();
+				var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&&appid=6f821503a55382f45b4d6289df23f31a";
+				$.get(url, function(res) {
+					console.log(res);
+					$("#city_name").text(res.name);
+					$("#temp").text(res.main.temp);
+				}, 'json');
+				// don't forget to return false so the page doesn't refresh
+				return false;
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<form class="" action="index.html" method="post">
+		<input id="city" type="text" name="" value="">
+		<input type="submit" name="" value="Search Weather">
+	</form>
+	<div class="">
+		<p>City: <span id="city_name"></span></p>
+		<p>Temperature(Fahrenheit): <span id="temp"></span></p>
+	</div>
+</body>
+
 </html>
